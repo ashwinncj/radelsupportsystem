@@ -11,13 +11,14 @@ if ($status) {
     $data['user_email'] = $user_email;
     $data['user_name'] = $user_name;
     //$db->insert('tickets_meta', $data);
-    $db->from('tickets_meta');
-    $db->select('id');
+    $db->from('tickets_meta b');
+    $db->select('b.id');
     $db->select('user_name');
-    $db->where('id', '3');
+    $db->join('tickets_details a', 'b.ticket_uid=a.ticket_uid');
     $db->where('user_email', 'ashwin@radelcorp.in');
-    $result = $db->get();
-    echo $result[0]['user_name'];
+    //$db->limit(1);
+    $db->conditions('LIMIT 10');
+    print_r($result = $db->get());
 } else {
     echo 'Missing arguments.';
 }
