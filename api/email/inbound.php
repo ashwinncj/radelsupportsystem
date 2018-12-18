@@ -1,6 +1,6 @@
 <?php
 echo 'Stage1';
-isset($_POST) ? TRUE : exit('No POST Set !');
+isset($_POST['sender']) ? TRUE : exit('No POST Set !');
 //$params['user_email'] = 'ash@test';
 //$params['user_name'] = 'Ash';
 //$params['user_message'] = 'Message';
