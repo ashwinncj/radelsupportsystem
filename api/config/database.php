@@ -12,7 +12,7 @@ class Database {
     public function __construct() {
         $host = "localhost";
         $username = "rssadmin";
-        $password = "kYYDKgQ7ijWoc3Qz@*14";
+        $password = "kYYDKgQ7ijWoc3Qz@*145";
         $dbname = "radelsupportsystem";
         $this->db = new mysqli($host, $username, $password, $dbname);
     }
