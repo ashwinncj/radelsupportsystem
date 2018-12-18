@@ -14,12 +14,19 @@ if ($status) {
     $details['details'] = $user_message;
     $details['time'] = time();
     $meta['time'] = $details['time'];
-    $db->insert('tickets_meta', $meta);
-    $db->insert('tickets_details', $details);
-    $msg['success'] = TRUE;
-    $msg['ticket_uid'] = $meta['ticket_uid'];
-    $data = json_encode($msg);
-    echo $data;
+    $result = $db->insert('tickets_meta', $meta);
+    $result ? $result = $db->insert('tickets_details', $details) : FALSE;
+    if ($result) {
+        $msg['success'] = TRUE;
+        $msg['ticket_uid'] = $meta['ticket_uid'];
+        $data = json_encode($msg);
+        echo $data;
+    } else {
+        $msg['success'] = FALSE;
+        $msg['error'] = 'E102 - Database Configuration mismatch.';
+        $data = json_encode($msg);
+        echo $data;
+    }
 } else {
     $msg['success'] = FALSE;
     $msg['error'] = 'E101 - Missing Arguments';
