@@ -29,7 +29,7 @@ class Database {
             $keys = rtrim($table_keys, ', ');
             $values = rtrim($table_values, ', ');
             $query = 'INSERT INTO `' . $table . '` (' . $keys . ') VALUES (' . $values . ')';
-            echo $query;
+            //echo $query;
             $result = $this->db->query($query);
             return $result;
         }
@@ -79,13 +79,15 @@ class Database {
 
     public function get() {
         $var_select = rtrim($this->var_select, ', ');
+        $var_select = $var_select == '' ? '*' : $var_select;
         $var_where = rtrim($this->var_where, 'AND ');
         $var_where = rtrim($var_where, 'OR ');
+        $var_where = $var_where == '' ? 1 : $var_where;
         $var_on = $this->var_on == '' ? '' : $this->var_on;
         $var_limit = $this->var_limit == '' ? '' : $this->var_limit;
         $var_conditions = $this->var_conditions == '' ? '' : $this->var_conditions;
         $query = 'SELECT ' . $var_select . ' FROM ' . $this->var_from . $var_on . ' WHERE ' . $var_where . $var_limit . $var_conditions;
-        echo $query;
+        //echo $query;
         $result = $this->db->query($query);
         if ($result) {
             if ($result->num_rows > 0) {
