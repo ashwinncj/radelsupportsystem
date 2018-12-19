@@ -3,8 +3,8 @@
 class Mailer {
 
     public function mailgun($from, $to, $subject, $text) {
-        $url = 'localhost/radelsupportsystem-mailer/mailer.php';
-        //$url = 'http://radel.space/radelsupportsystem-mailer/mailer.php';
+        //$url = 'localhost/radelsupportsystem-mailer/mailer.php';
+        $url = 'http://radel.space/radelsupportsystem-mailer/mailer.php';
         $params = ['from' => $from, 'to' => $to, 'subject' => $subject, 'html' => $text, 'h:Reply-To' => $from];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
