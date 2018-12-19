@@ -21,6 +21,13 @@ if ($status) {
         $msg['ticket_uid'] = $meta['ticket_uid'];
         $data = json_encode($msg);
         echo $data;
+        $message = "<p>Hi " . $user_name . ", <br>Thank you for contacting RADEL Support. Your query will be responded soon.</p>"
+                . "<p>Here is the summary of the ticket raised :<br>"
+                . "<b>Ticket ID: " . $details['ticket_uid'] . "</b><br>"
+                . "You can reply to this email to provide additional details or if you have any more questions.</p>";
+        require_once '../mailer/mail.php';
+        $mailer = new Mailer();
+        $mailer->mailgun('RADEL Support <'.$details['ticket_uid'].'@radel.space>', $user_email,'RADEL Support Ticket - ID-'.$details['ticket_uid'], $message);
     } else {
         $msg['success'] = FALSE;
         $msg['error'] = 'E102 - Database Configuration mismatch.';
