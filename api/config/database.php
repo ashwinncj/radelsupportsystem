@@ -30,7 +30,7 @@ class Database {
             $keys = rtrim($table_keys, ', ');
             $values = rtrim($table_values, ', ');
             $query = 'INSERT INTO `' . $table . '` (' . $keys . ') VALUES (' . $values . ')';
-            echo $query;
+            //echo $query;
             $result = $this->db->query($query);
             return $result;
         }
