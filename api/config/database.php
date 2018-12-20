@@ -7,6 +7,7 @@ class Database {
     public $var_where = '';
     public $var_on = '';
     public $var_limit = '';
+    public $var_order = '';
     public $var_conditions = '';
 
     public function __construct() {
@@ -29,7 +30,7 @@ class Database {
             $keys = rtrim($table_keys, ', ');
             $values = rtrim($table_values, ', ');
             $query = 'INSERT INTO `' . $table . '` (' . $keys . ') VALUES (' . $values . ')';
-            //echo $query;
+            echo $query;
             $result = $this->db->query($query);
             return $result;
         }
@@ -70,6 +71,13 @@ class Database {
         }
     }
 
+    public function order($col = '', $order = '') {
+        $args = ( $order == '' ? FALSE : $col == '' ? FALSE : TRUE);
+        if ($args) {
+            $this->var_order.=' ORDER BY ' . $col . ' ' . $order . ' ';
+        }
+    }
+
     public function conditions($conditions = '') {
         $args = ( $conditions == '' ? FALSE : TRUE);
         if ($args) {
@@ -86,7 +94,7 @@ class Database {
         $var_on = $this->var_on == '' ? '' : $this->var_on;
         $var_limit = $this->var_limit == '' ? '' : $this->var_limit;
         $var_conditions = $this->var_conditions == '' ? '' : $this->var_conditions;
-        $query = 'SELECT ' . $var_select . ' FROM ' . $this->var_from . $var_on . ' WHERE ' . $var_where . $var_limit . $var_conditions;
+        $query = 'SELECT ' . $var_select . ' FROM ' . $this->var_from . $var_on . ' WHERE ' . $var_where . $var_conditions . $this->var_order . $var_limit;
         //echo $query;
         $result = $this->db->query($query);
         if ($result) {
