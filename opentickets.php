@@ -15,13 +15,7 @@ if (isset($_POST['user_email'])) {
 }
 ?>
 <div>
-    <form action="" method="POST">
-        <label>Email : </label>
-        <input type="email" name="user_email"><br>
-        <label>Name : </label>
-        <input type="text" name="user_name"><br>
-        <label>Message : </label><br>
-        <textarea name="user_message"></textarea><br>
-        <input type="submit">
-    </form>
+    <table>
+        
+    </table>
 </div>

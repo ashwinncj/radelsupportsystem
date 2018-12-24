@@ -10,6 +10,7 @@ if ($status) {
     $db->where('a.ticket_uid', $ticketid);
     $db->order('b.time', 'DESC');
     $result = $db->get();
+    (!$result) ? $result['error'] = 'Invalid Ticket ID' : '';
     echo json_encode($result);
 } else {
     echo 'No input';

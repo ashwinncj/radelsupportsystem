@@ -85,7 +85,7 @@ class Database {
         }
     }
 
-    public function get() {
+    public function get($action = 'get') {
         $var_select = rtrim($this->var_select, ', ');
         $var_select = $var_select == '' ? '*' : $var_select;
         $var_where = rtrim($this->var_where, 'AND ');
@@ -97,14 +97,18 @@ class Database {
         $query = 'SELECT ' . $var_select . ' FROM ' . $this->var_from . $var_on . ' WHERE ' . $var_where . $var_conditions . $this->var_order . $var_limit;
         //echo $query;
         $result = $this->db->query($query);
-        if ($result) {
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $data[] = $row;
-                }
+        $continue = $result ? TRUE : FALSE;
+        $num_rows = $continue ? $result->num_rows : 0;
+        if ($num_rows > 0 && $action == 'get') {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
             }
+            return $result ? isset($data) ? $data : FALSE : FALSE;
+        } elseif ($action == 'count') {
+            return $num_rows;
+        } else {
+            return FALSE;
         }
-        return $result ? isset($data) ? $data : FALSE : FALSE;
     }
 
 }

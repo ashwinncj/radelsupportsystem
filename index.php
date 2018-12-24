@@ -1,3 +1,16 @@
+<?php
+$params['type'] = 'open';
+$ch = curl_init();
+//curl_setopt($ch, CURLOPT_URL, "http://radel.space/radelsupportsystem/api/ticket/count.php");
+curl_setopt($ch, CURLOPT_URL, "localhost/radelsupportsystem/api/ticket/count.php");
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$server_output = curl_exec($ch);
+curl_close($ch);
+$count = json_decode($server_output, TRUE);
+$count = $count['count']
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -83,7 +96,7 @@
                 <ul class="nav">
                     <li><a href="http://localhost/radelsupportsystem">Create Ticket</a></li>
                     <li><a href="">Tickets</a></li>
-                    <li class="sub-menu"><a href="">Open Tickets</a></li>
+                    <li class="sub-menu"><a href="">Open Tickets <span style="color: orange">[ <?php echo $count; ?>  ]</span></a></li>
                     <li class="sub-menu"><a href="">Close Tickets</a></li>
                     <li class="sub-menu"><a href="">All Tickets</a></li>
                     <li><a href="">Help</a></li>
