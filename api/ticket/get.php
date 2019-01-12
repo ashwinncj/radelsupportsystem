@@ -2,7 +2,7 @@
 
 $status = isset($_POST['type']) ? TRUE : FALSE;
 if ($status) {
-    $limit = isset($_POST['limit']) ? $_POST['limit'] : '10';
+    $limit = isset($_POST['limit']) ? $_POST['limit'] : '20';
     $type = $_POST['type'] == 'all' ? '' : $_POST['type'];
     require_once '../config/database.php';
     $db = new Database();
